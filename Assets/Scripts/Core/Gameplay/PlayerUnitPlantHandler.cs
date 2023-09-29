@@ -11,24 +11,34 @@ namespace Core.Gameplay
     public class PlayerUnitPlantHandler : IStartable, IDisposable
     {
         private readonly PlayerUnitsProvider _playerUnitsProvider;
+        private readonly CurrencyHandler _currencyHandler;
+        private readonly PlantIndicator _plantIndicator;
         private PlayerUnitType _playerSelectedUnitType;
         private int _playerSelectedUnitPrice;
-        private bool _selected = false;
+        private bool _playerUnitSelected = false;
 
-        public PlayerUnitPlantHandler(PlayerUnitsProvider playerUnitsProvider)
+        public PlayerUnitPlantHandler(PlayerUnitsProvider playerUnitsProvider, CurrencyHandler currencyHandler,
+            PlantIndicator plantIndicator)
         {
             _playerUnitsProvider = playerUnitsProvider;
+            _currencyHandler = currencyHandler;
+            _plantIndicator = plantIndicator;
         }
         
         private void OnPlayerUnitSelected(PlayerUnitType unitType, int price)
         {
+            if (!CanBuy(price)) return;
+            
             _playerSelectedUnitType = unitType;
             _playerSelectedUnitPrice = price;
-            _selected = true;
+            _playerUnitSelected = true;
+            _plantIndicator.SetActive(true);
         }
 
         private void OnPlantPlaceSelected(PlantPlace plantPlace)
         {
+            if(!_playerUnitSelected) return;
+            
             PlantPlayerUnit(plantPlace);
         }
 
@@ -38,11 +48,26 @@ namespace Core.Gameplay
 
             playerUnit.transform.SetParent(plantPlace.transform);
             playerUnit.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            
+            ClearSelected();
+        }
+
+        private void ClearSelected()
+        {
+            _playerSelectedUnitType = PlayerUnitType.None;
+            _playerSelectedUnitPrice = 0;
+            _playerUnitSelected = false;
+            _plantIndicator.SetActive(false);
         }
 
         public void Start()
         {
             Subscribe();
+        }
+
+        private bool CanBuy(int price)
+        {
+            return _currencyHandler.Subtract(price);
         }
 
         public void Dispose()
