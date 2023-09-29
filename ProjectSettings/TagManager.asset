@@ -11,9 +11,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Gangster
+  - Enemy
+  - Bullet
   - 
   - 
   - 
@@ -38,6 +38,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2986877279
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Midground
+    uniqueID: 1280084379
+    locked: 0
+  - name: Foreground
+    uniqueID: 1021353975
     locked: 0
