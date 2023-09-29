@@ -22,13 +22,15 @@
             UpdateIndicator(CurrentGameplayCurrency);
         }
 
-        public bool Subtract(int amount)
+        public void Subtract(int amount)
         {
-            if (CurrentGameplayCurrency - amount < 0) return false;
-            
             CurrentGameplayCurrency -= amount;
             UpdateIndicator(CurrentGameplayCurrency);
-            return true;
+        }
+
+        public bool CanBuy(int amount)
+        {
+            return CurrentGameplayCurrency - amount > 0;
         }
 
         private void UpdateIndicator(int currency)

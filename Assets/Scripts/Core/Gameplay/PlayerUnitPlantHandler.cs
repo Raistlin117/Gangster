@@ -27,7 +27,7 @@ namespace Core.Gameplay
         
         private void OnPlayerUnitSelected(PlayerUnitType unitType, int price)
         {
-            if (!CanBuy(price)) return;
+            if (!_currencyHandler.CanBuy(price)) return;
             
             _playerSelectedUnitType = unitType;
             _playerSelectedUnitPrice = price;
@@ -48,6 +48,7 @@ namespace Core.Gameplay
 
             playerUnit.transform.SetParent(plantPlace.transform);
             playerUnit.transform.SetLocalPositionAndRotation(Vector3.zero, Quaternion.identity);
+            _currencyHandler.Subtract(_playerSelectedUnitPrice);
             
             ClearSelected();
         }
@@ -63,11 +64,6 @@ namespace Core.Gameplay
         public void Start()
         {
             Subscribe();
-        }
-
-        private bool CanBuy(int price)
-        {
-            return _currencyHandler.Subtract(price);
         }
 
         public void Dispose()
