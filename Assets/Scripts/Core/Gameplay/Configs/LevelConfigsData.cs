@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Core.Gameplay.Configs
 {
@@ -7,10 +8,8 @@ namespace Core.Gameplay.Configs
     {
         public int Id;
         public int Lines;
-        public int SpawnStartTime;
-        public int SpawnEndTime;
-        public int WavesCount;
-        public int Duration;
         public int StartCurrency;
+        public int EnemyCount; //ужас
+        public List<WaveData> WaveData;
     }
 }

@@ -30,7 +30,7 @@
 
         public bool CanBuy(int amount)
         {
-            return CurrentGameplayCurrency - amount > 0;
+            return CurrentGameplayCurrency - amount >= 0;
         }
 
         private void UpdateIndicator(int currency)

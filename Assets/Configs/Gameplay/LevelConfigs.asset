@@ -15,22 +15,19 @@ MonoBehaviour:
   _levelConfigsData:
   - Id: 1
     Lines: 1
-    SpawnStartTime: 10
-    SpawnEndTime: 60
-    WavesCount: 2
-    Duration: 60
     StartCurrency: 150
+    EnemyCount: 5
+    WaveData:
+    - StartTime: 10
+      EndTime: 30
+    - StartTime: 31
+      EndTime: 60
   - Id: 2
     Lines: 3
-    SpawnStartTime: 10
-    SpawnEndTime: 120
-    WavesCount: 4
-    Duration: 120
-    StartCurrency: 50
-  - Id: 3
-    Lines: 4
-    SpawnStartTime: 10
-    SpawnEndTime: 120
-    WavesCount: 4
-    Duration: 120
-    StartCurrency: 50
+    StartCurrency: 150
+    EnemyCount: 10
+    WaveData:
+    - StartTime: 10
+      EndTime: 30
+    - StartTime: 31
+      EndTime: 60

@@ -17,10 +17,9 @@ namespace Core.Gameplay
         
         public GameObject GetPlayerUnit(PlayerUnitType playerUnitType)
         {
-            var unitsStruct = _playerUnitsConfig.PlayerUnits
-                .Find(x => x.PlayerUnitType == playerUnitType);
+            var playerUnitGameObject = _playerUnitsConfig.GetPlayerUnitGameObject(playerUnitType);
 
-            return _monoBehaviourProvider.GetInstantiate(unitsStruct.PlayerUnitBase.gameObject);
+            return _monoBehaviourProvider.GetInstantiate(playerUnitGameObject);
         }
     }
 }

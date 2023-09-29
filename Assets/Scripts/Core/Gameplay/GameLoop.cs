@@ -1,5 +1,6 @@
 ﻿using System;
 using Core.Gameplay.Configs;
+using Core.Gameplay.PlayerUnits.MoneyMachine;
 using Core.UI.SignalScripts;
 using Utils;
 using VContainer.Unity;
@@ -42,14 +43,21 @@ namespace Core.Gameplay
             _currencyHandler.Set(startCurrency);
         }
 
+        private void OnAddMoney(int amount)
+        {
+            _currencyHandler.Add(amount);
+        }
+
         private void Subscribe()
         {
             Signals.Get<PlayButtonPressedSignal>().AddListener(OnPlayButtonPressed);
+            Signals.Get<AddMoney>().AddListener(OnAddMoney); //изначально этого здесь не было
         }
 
         private void Unsubscribe()
         {
             Signals.Get<PlayButtonPressedSignal>().RemoveListener(OnPlayButtonPressed);
+            Signals.Get<AddMoney>().RemoveListener(OnAddMoney); //изначально этого здесь не было
         }
     }
 }
